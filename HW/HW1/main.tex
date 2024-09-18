@@ -1,0 +1,313 @@
+\documentclass{article}
+
+% If you're new to LaTeX, here's some short tutorials:
+% https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
+% https://en.wikibooks.org/wiki/LaTeX/Basics
+
+% Formatting
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[titletoc,title]{appendix}
+
+% Math
+% https://www.overleaf.com/learn/latex/Mathematical_expressions
+% https://en.wikibooks.org/wiki/LaTeX/Mathematics
+\usepackage{amsmath,amsfonts,amssymb,mathtools}
+
+% Images
+% https://www.overleaf.com/learn/latex/Inserting_Images
+% https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
+\usepackage{graphicx,float}
+
+% Tables
+% https://www.overleaf.com/learn/latex/Tables
+% https://en.wikibooks.org/wiki/LaTeX/Tables
+
+% Algorithms
+% https://www.overleaf.com/learn/latex/algorithms
+% https://en.wikibooks.org/wiki/LaTeX/Algorithms
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{algorithmic}
+
+% Code syntax highlighting
+% https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted
+\usepackage{minted}
+\usemintedstyle{borland}
+
+% References
+% https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX
+% https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+% Title content
+\title{COMP 221 Fall 2024 Homework 1}
+\date{Due: Friday, September 20, by 11:59 pm}
+
+\begin{document}
+
+\maketitle
+
+
+% Introduction and Overview
+\section{Guidelines}
+Please \textbf{type up }and submit a PDF of your solutions.  I recommend LaTex (Overleaf is really nice to use online), but you are certainly welcome to use Google Docs or some other word processing program.  Just make sure to save it as a PDF before submission.
+
+\textbf{Programming language:} You are welcome to use Python or Java.
+
+\textbf{Do your own work:} Homework should be individual work.  You may discuss problems with other people, but you must write up your solutions yourself.  I will not say that the web is off limits, but handing in solutions you find online as if they are your own is also not acceptable.
+
+Make sure you have your name on your homework!
+
+
+\begin{itemize}
+    \item\textbf{ Question 1}
+
+
+          From Skiena, Question 2-1.  What value is returned by the following function?  Express your answer as a function of $n$.  Write the order of growth in terms of big-$\Theta$. Hint: be very precise with summation variables.
+
+          \begin{algorithm}
+              \begin{algorithmic}
+                  \STATE{let $r=0$}
+
+                  \FOR{$i = 1 : n-1$}
+                  \FOR{$j = i+1 : n$}
+                  \FOR{$ k = 1 : n$}
+                  \STATE{r = r + 1}
+                  \ENDFOR
+                  \ENDFOR
+                  \ENDFOR
+                  \STATE{return r}
+              \end{algorithmic}
+              \caption{function mystery(n) }
+              \label{alg:algo}
+          \end{algorithm}
+
+    \item \textbf{Question 2}
+
+
+          From Skiena, Question 2-2.  What value is returned by the following function?  Express your answer as a function of $n$.  Write the order of growth in terms of big-$\Theta$.
+          \begin{algorithm}
+              \begin{algorithmic}
+                  \STATE{let $r=0$}
+
+                  \FOR{$i = 1 : n$}
+                  \FOR{$j = 1 : i$}
+                  \FOR{$ k = j : i+j$}
+                  \STATE{r = r + 1}
+                  \ENDFOR
+                  \ENDFOR
+                  \ENDFOR
+                  \STATE{return r}
+              \end{algorithmic}
+              \caption{function pesky(n) }
+              \label{alg:algo}
+          \end{algorithm}
+
+
+    \item \textbf{Question 3 -- Programming}
+
+
+          This question requires you to use a graphics library for either Java or Python.  For Python, I strongly recommend using \texttt{imageTools.py} that we used in COMP 123 (file provided with this homework).  For Java, \texttt{BufferedImage} is what I used (make sure to include the library in your program).
+
+
+          Convolution is an image analysis process by which we create a new image from an original one (see: \href{https://en.wikipedia.org/wiki/Kernel\_(image\_processing)\#Convolution}).  A pixel in the new image located at $(x, y)$ will have its value determined by the values of the pixel located at $(x, y)$ in the original image, AND its neighbors.  These values are all scaled by a kernel, a 3x3 matrix that applies weights to all the original pixel values (some kernels may be larger than 3x3).
+
+          When looking at a picture, how do we determine what is the boundary, or edge, of an object?  Edges in an image are usually determined by sharp gradients - dramatic changes in color or light. Edge detection is a specialized area of computer vision where we use an algorithm to find the edges (those dramatic changes in color or light) in an image. Sobel came up with a pair of 3x3 kernel filters that can help us find edges.  One kernel is for the horizontal component, and the other is for the vertical.
+
+          \begin{center}
+              \begin{tabular}{ c c }
+                  x-filter & y-filter \\
+                  $
+                      \begin{bmatrix}
+                          -1 & 0 & +1 \\
+                          -2 & 0 & +2 \\
+                          -1 & 0 & +1
+                      \end{bmatrix}
+                  $
+                           & $
+                      \begin{bmatrix}
+                          +1 & +2 & +1 \\
+                          0  & 0  & 0  \\
+                          -1 & -2 & -1
+                      \end{bmatrix}
+                  $
+              \end{tabular}
+          \end{center}
+
+          \iffalse
+              The x-filter is:
+
+              $
+                  \begin{bmatrix}
+                      -1 & 0 & +1 \\
+                      -2 & 0 & +2 \\
+                      -1 & 0 & +1
+                  \end{bmatrix}
+              $
+          \fi
+
+          \iffalse
+              The y-filter is:
+
+              \begin{center}
+                  \includegraphics[width=.2\textwidth]{sobel_y.png}
+              \end{center}
+          \fi
+
+          To calculate the convolution, we have to do something like this:
+          \renewcommand{\labelitemii}{$\bullet$}
+          \renewcommand{\labelitemiii}{$\bullet$}
+          \begin{itemize}
+
+              \item Suppose we have an original image, named \texttt{origImage}.  At pixel location $(x, y)$ in \texttt{origImage}, let’s say the RGB values are \texttt{(r5, g5, b5)}.
+
+              \item We want to use this information to calculate the RGB values of the image containing the edges of \texttt{origImage} (let’s call it \texttt{edgeImg})
+
+              \item To do that, we need to look at the 3x3 group of pixels around and including $(x, y)$, and multiply each of those RGB values with the respective kernel value
+
+
+                    For example, for the x-filter:
+
+                    \begin{itemize}
+
+
+                        \item $-1$ (at $(0, 0)$ of the x-filter kernel) $* (r1, b1, g1)$ at pixel location $(x-1, y-1)$. We need to do it 3 times - one each for the red, green, and blue channels
+
+                        \item $0 * (r2, b2, g2)$ at pixel location $(x, y-1)$
+
+                        \item $1 * (r3, b3, g3)$ at pixel location $(x+1, y-1)$
+
+                        \item $-2 * (r4, b4, g4)$ at pixel location $(x-1, y)$
+
+                        \item $0 * (r5, b5, g5)$ at pixel location $(x, y)$
+
+                        \item $2 * (r6, b6, g6)$ at pixel location $(x+1, y)$
+
+                        \item $-1 * (r7, b7, g7)$ at pixel location $(x-1, y+1)$
+
+                        \item $0 * (r8, b8, g8)$ at pixel location $(x, y+1)$
+
+                        \item $1 * (r9, b9, g9)$ at pixel location $(x+1, y+1)$
+
+                    \end{itemize}
+
+                    This image from ResearchGate helps illustrate my point above (slightly different variables).
+
+                    \begin{center}
+                        \includegraphics[width=.8\textwidth]{convo_1.png}
+                    \end{center}
+
+
+
+          \end{itemize}
+
+
+          Your job for this homework assignment is to implement the Sobel filter for an image of your choosing.  Submit your code, your original image, and your ``edge” image for grading and credit. You will not be graded on your code, unless for partial credit. The edge image should be in grayscale (sometimes called black and white, but strictly speaking, not the same), which means the red, green, and blue channels have the same value.
+
+          You will need to apply the x- and y- filters to each of the red, green, and blue channel values of a pixel, and then sum those values (giving you \texttt{sumXRed}, \texttt{sumXGreen}, and \texttt{sumXBlue}, and the same for \texttt{sumY} values).  Then, average \emph{those} three values together (giving you \texttt{Gx} or \texttt{sumX} and \texttt{Gy} or \texttt{sumY} values).  Then, calculate $G$ using $G = \sqrt{G_x^2 + G_y^2}$.  Finally, set the color of the pixel located at $(x, y)$ in the \texttt{edgeImg} image to be $(G, G, G)$.
+
+          \hrulefill
+          \vspace{5mm}
+
+          For \textbf{Python} and \texttt{imageTools}, useful methods would be:
+
+          \begin{itemize}
+
+              \item \texttt{pic = Picture("picturename.jpg")} to create a picture object from a picture on your computer
+
+              \item \texttt{width = pic.getWidth()} to get the width, in pixels, of a picture
+
+              \item \texttt{height = pic.getHeight()} to get the height, in pixels, of a picture
+
+              \item \texttt{newPic = Picture(width, height)} to create a new picture object with the specified width and height
+
+              \item \texttt{(r, g, b) = pic.getColor(x, y)} to get the red, green, and blue channel information for the pixel at $(x, y)$ in picture
+
+              \item \texttt{newPic.setColor(x, y, (r, g, b))} to set the color at pixel $(x, y)$ in \texttt{newPic} to the specified $r, g, b$ values
+
+              \item \texttt{pic.show()} to see the picture.  I recommend you put an \texttt{input(”Press any key to continue...”)} after the \texttt{pic.show()} command so it keeps the picture up until you are done
+
+          \end{itemize}
+
+          \hrulefill
+
+          \vspace{5mm}
+
+          For \textbf{Java} and \texttt{BufferedImage} (note: you are welcome to use a different library, this was the first one I found that was semi-bearable, and it is what is used to support Kilt-graphics from 127/128)
+
+          \begin{itemize}
+
+              \item To create a new \texttt{BufferedImage} object, and to read in a picture file:
+                    \begin{verbatim}
+        
+        BufferedImage img = null, modImg = null;
+        try {
+            img = ImageIO.read(new File("picturename.jpg"));
+        } catch (IOException e) {
+            System.out.println("Read in image error...");
+        }
+        
+\end{verbatim}
+
+
+              \item To save the newly created file on your computer (I haven’t found an easy way to just have the window pop up yet...):
+
+                    \begin{verbatim}
+        try {
+            File outputfile = new File("saved1.png");
+            ImageIO.write(modImg, "png", outputfile);
+        } catch (IOException e) {
+            // handle exception
+            System.out.println("Exception in saving...");
+        }
+\end{verbatim}
+
+              \item To create a new \texttt{BufferedImage} object of specified height and width:
+
+                    \begin{verbatim}
+        
+    BufferedImage edges = new BufferedImage(pic.getWidth(), pic.getHeight(),
+    BufferedImage.TYPE_INT_RGB);
+    
+\end{verbatim}
+
+              \item To extract red, green, and blue values from pic at (x, y):
+
+                    \begin{verbatim}
+            
+        mycolor = new Color(pic.getRGB(x, y));
+        r5 = mycolor.getRed();
+        g5 = mycolor.getBlue();
+        b5 = mycolor.getGreen();
+        
+\end{verbatim}
+
+              \item To set the $r, g, b$ values in \texttt{edgeImg} to be $(g, g, g)$:
+
+                    \begin{verbatim}
+
+        rgb = ((g&0x0ff)<<16)|((g&0x0ff)<<8)|(g&0x0ff);
+        edges.setRGB(x, y, rgb);
+        
+\end{verbatim}
+
+
+
+
+
+          \end{itemize}
+
+
+
+
+
+\end{itemize}
+
+
+
+
+
+
+
+\end{document}
