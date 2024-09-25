@@ -11,7 +11,7 @@ height = pic.getHeight()
 newPic = it.Picture(width, height)
 
 
-def tensor_flow_step(x, y, x_filter, y_filter, pic):
+def calculate_G(x, y, x_filter, y_filter, pic):
     x_avg = 0
     y_avg = 0
     for i in range(3):
@@ -33,18 +33,14 @@ def tensor_flow_step(x, y, x_filter, y_filter, pic):
     return np.sqrt(x_avg**2 + y_avg**2)
 
 
-def compute():
-    x_filter = [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]]
-    y_filter = [[1, 2, 1], [0, 0, 0], [-1, -2, -1]]
-    with tf.device('/GPU:0'):
-        for x in range(pic.getWidth()):
-            for y in range(pic.getHeight()):
-                G = tensor_flow_step(x, y, x_filter, y_filter, pic)
-                newPic.setColor(x, y, (G, G, G))
+x_filter = [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]]
+y_filter = [[1, 2, 1], [0, 0, 0], [-1, -2, -1]]
+for x in range(pic.getWidth()):
+    for y in range(pic.getHeight()):
+        G = calculate_G(x, y, x_filter, y_filter, pic)
+        newPic.setColor(x, y, (G, G, G))
 
 
-print(tf.config.list_physical_devices())
-compute()
 newPic.show()
 input("Press Enter to continue...")
 # newPic.save(image_out)

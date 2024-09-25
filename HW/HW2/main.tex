@@ -1,0 +1,136 @@
+\documentclass{article}
+
+% If you're new to LaTeX, here's some short tutorials:
+% https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
+% https://en.wikibooks.org/wiki/LaTeX/Basics
+
+% Formatting
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[titletoc,title]{appendix}
+
+% Math
+% https://www.overleaf.com/learn/latex/Mathematical_expressions
+% https://en.wikibooks.org/wiki/LaTeX/Mathematics
+\usepackage{amsmath,amsfonts,amssymb,mathtools}
+
+% Images
+% https://www.overleaf.com/learn/latex/Inserting_Images
+% https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
+\usepackage{graphicx,float}
+
+% Tables
+% https://www.overleaf.com/learn/latex/Tables
+% https://en.wikibooks.org/wiki/LaTeX/Tables
+
+% Algorithms
+% https://www.overleaf.com/learn/latex/algorithms
+% https://en.wikibooks.org/wiki/LaTeX/Algorithms
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{algorithmic}
+
+% Code syntax highlighting
+% https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted
+\usepackage{minted}
+\usemintedstyle{borland}
+
+% References
+% https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX
+% https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+% Title content
+\title{COMP 221-01 Homework 2}
+\author{Your Name}
+\date{Due: Friday, February 11, by 11:59 pm}
+
+\begin{document}
+
+\maketitle
+
+
+% Introduction and Overview
+\section{Guidelines} 
+Please \textbf{type up }and submit a PDF of your solutions.  I recommend LaTex (Overleaf is really nice to use online), but you are certainly welcome to use Google Docs or some other word processing program.  Just make sure to save it as a PDF before submission.  
+
+\textbf{Programming language:} You are welcome to use Python or Java.  
+
+\textbf{Do your own work:} Homework should be individual work.  You may discuss problems with other people, but you must write up your solutions yourself.  I will not say that the web is off limits, but handing in solutions you find online as if they are your own is also not acceptable.
+
+Make sure you have your name on your homework!  
+
+
+\begin{itemize}
+    \item\textbf{ Question 1}
+
+For the following questions, find positive constants $c$ and $n_0$ such that the relationship is true.  
+    
+    \textbf{(a)} $f(n) = n^2 + 3n + 2, f(n) = O(n^2)$
+    
+    \textbf{(b)} $f(n) = 4n^3 + n^2 + nlogn + 5, f(n) = \Theta(n^3)$
+    
+    \textbf{(c)} $f(n) = n^2 - 8n + 1, f(n) = \Omega(n)$
+    
+    
+    \item \textbf{Question 2}
+
+    From Levitin: A network topology specifies how computers, printers, and other devices are connected over a network. The figure below illustrates three common topologies of networks: the ring, the star, and the fully connected mesh: 
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=1.0\linewidth]{shapes.jpg}
+        \label{fig:dubs}
+    \end{figure}
+
+    You are given a boolean matrix $A[0..n-1, 0...n-1]$, where $n>3$, which is supposed to be the adjacency matrix of a graph modeling a network with one of these topologies. Your task is to determine which of these three topologies, if any, the matrix represents. Design a brute-force algorithm for this task and indicate it's big-$\Theta$ run-time. 
+
+
+    \item \textbf{Question 3 - Programming}
+    
+    You should develop a program that analyzes the performance of add and delete operations on lists. I would like you to compare the performance of adding and removing to the front, back, and middle of a list, by filling in the table below.  
+    
+    You will need to submit your code, but the preceptors will not be grading it.  They will only be grading you based on your table (unless there is reason for them to look at your code).  
+    
+   
+    % begin{figure}[tb] % t = top, b = bottom, etc.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=1.0\linewidth]{algo_table_lists.png}
+        \label{fig:dubs}
+    \end{figure}
+        
+    For each cell of the table, you should perform the following steps:
+    
+    Repeat this process 10 times, and take the overall average time:
+        \begin{itemize}
+            \item If you are timing deletes, fill the list up to the specified size (you are free to use random numbers, the same number, etc).
+            \item Start the timer (you can look up the appropriate timer class for your language)
+            \item Perform the requested operation n times. If the operation is an add, your data structure will grow from size 0 to size n. If your operation is a delete, your data structure will shrink from size n to size 0.
+            \item Stop the timer.
+            \item Calculate the time per operation by dividing the elapsed time by n.
+        \end{itemize} 
+  
+When you are done filling out the table, write a few brief statements analyzing what you see.  Are the values what you expected?  Did anything surprise you? 
+
+Notes:
+\begin{itemize}
+\item\textbf{ Automate things. }This process may look laborious, but it should not be! You can (and should) do all of it within a single program. Try to automate things so that you don't to run your program for each cell over and over by hand.
+
+\item\textbf{ Running out of space / time with large N.} Note that due to memory and CPU constraints, you may not be able to complete the full table. You might run out of memory or your program may take too long. That's okay. Just write "too big" in the table!
+
+\item \textbf{Timing functions. }In Java you can get the current time in milliseconds (one-thousandth of a second) by \verb|System.currentTimeMillis()|. In Python you can get the time in seconds using \verb|time.time()|.
+
+\item \textbf{Java ArrayList:} If using Java, you should use \verb|ArrayList| rather than LinkedList. 
+
+    
+    
+    
+\end{itemize}
+\end{itemize}
+
+
+
+
+
+\end{document}
