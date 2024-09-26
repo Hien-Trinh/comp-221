@@ -11,6 +11,7 @@
 % Algorithms
 \usepackage[ruled,vlined]{algorithm2e}
 \usepackage{algorithmic}
+\usepackage{listings}
 
 % Code syntax highlighting
 \usepackage{minted}
@@ -96,35 +97,39 @@
 
 
     \item\textbf{ Question 2}
-        \begin{equation}
-            r=\sum^{n}_{i=1} \sum^{i}_{j=1} \sum^{i+j}_{k=j} 1
-        \end{equation}
-        \begin{equation}
-            r=\sum^{n}_{i=1} \sum^{i}_{j=1} (i+1)
-        \end{equation}
-        \begin{equation}
-            r=\sum^{n}_{i=1} i(i+1)
-        \end{equation}
-        \begin{equation}
-            r=\sum^{n}_{i=1} i^2 + \sum^{n}_{i=1} i
-        \end{equation}
-        \begin{equation}
-            r=\frac{n(n+1)(2n+1)}{6} + \frac{n(n+1)}{2}
-        \end{equation}
-        \begin{equation}
-            r=\frac{(n^2+n)(2n+1) + 3(n^2+n)}{6}
-        \end{equation}
-        \begin{equation}
-            r=\frac{2n^3 + n^2 + 2n^2 + n + 3n^2 + 3n}{6}
-        \end{equation}
-        \begin{equation}
-            r=\frac{n^3 + 3n^2 + 2n}{3}
-        \end{equation}
-        \begin{itemize}
-            \item[] Big-O: $O(n^3)$
-            \item[] Big-$\Omega$: $\Omega(n^3)$
-            \item[] Big-$\Theta$: $\Theta(n^3)$
-        \end{itemize}
+    \begin{lstlisting}
+        def getTopology(A):
+            n = len(A)
+            isRing = True
+            isStar = True
+            isFullyConnectedMesh = True
+            isCentralNode = False
+
+            for i in range(n):
+                totalAdjacent = 0
+                for j in range(n):
+                    if A[i][j]:
+                        totalAdjacent += 1
+
+                if isFullyConnectedMesh and totalAdjacent != n - 1:
+                    isFullyConnectedMesh = False
+                if isStar:
+                    if totalAdjacent == n - 1:
+                        isCentralNode = True
+                    elif totalAdjacent != 1:
+                        isStar = False
+                if isRing and totalAdjacent != 2:
+                    isRing = False
+
+            if isRing:
+                return "Ring"
+            elif isFullyConnectedMesh:
+                return "Fully Connected Mesh"
+            elif isStar and isCentralNode:
+                return "Star"
+            else:
+                return "None of the above"
+    \end{lstlisting}
 \end{itemize}
 
 \end{document}
