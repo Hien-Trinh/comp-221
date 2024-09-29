@@ -129,7 +129,27 @@
                 return "Star"
             else:
                 return "None of the above"
+
     \end{lstlisting}
+
+    \item\textbf{ Question 3}
+
+    \pagebreak
+    \begin{table}[]
+        \begin{tabular}{llllllllll}
+            n                       & 1 & 10 & 100 & 1000 & 10000 & 100000 & 1000000 & 10000000 & 100000000 \\
+            add to front of list    & 2 & 1  & 1   & 1    & 3     & 22     & too big & too big  & too big   \\
+            add to middle of list   & 1 & 1  & 1   & 1    & 2     & 12     & too big & too big  & too big   \\
+            add to end of list      & 1 & 1  & 1   & 1    & 1     & 1      & too big & too big  & too big   \\
+            del from front of list  & 1 & 0  & 0   & 0    & 1     & 7      & too big & too big  & too big   \\
+            del from middle of list & 0 & 0  & 0   & 0    & 0     & 4      & too big & too big  & too big   \\
+            del from end of list    & 0 & 0  & 0   & 0    & 0     & 0      & too big & too big  & too big  
+        \end{tabular}
+    \end{table}
+
+    Unit is in microsecond (0.000001s)
+
+    I expected that adding and deleting items to the end of the list are faster than the middle or the front, considering the fact that python implements lists using array. According to the table, this hypothesis holds up as large lists still perform adding and deleting at 1 or less microseconds, which process averages O(1).
 \end{itemize}
 
 \end{document}
