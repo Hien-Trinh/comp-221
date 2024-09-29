@@ -1,0 +1,125 @@
+\documentclass{article}
+
+% Formatting
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[titletoc,title]{appendix}
+
+% Math
+\usepackage{amsmath,amsfonts,amssymb,mathtools}
+
+% Algorithms
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{listings}
+
+% Code syntax highlighting
+\usepackage{minted}
+\usemintedstyle{borland}
+
+\title{Quiz 1}
+\author{David Trinh}
+\date{September 28, 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+    \item\textbf{ Question 1}
+        \begin{equation}
+            r=\sum^{n}_{i=0} \sum^{n-i-1}_{j=0} 1
+        \end{equation}
+        \begin{equation}
+            r=\sum^{n}_{i=0} (n - i)
+        \end{equation}
+        \begin{equation}
+            r=\sum^{n}_{i=0} n - \sum^{n}_{i=0} i
+        \end{equation}
+        \begin{equation}
+            r=n(n + 1) - \frac{n(n + 1)}{2}
+        \end{equation}
+        \begin{equation}
+            r=\frac{n(n + 1)}{2}
+        \end{equation}
+        \begin{equation}
+            r=\frac{n^2 + n}{2}
+        \end{equation}
+        \begin{equation}
+            r=\frac{1}{2} n^2 + \frac{1}{2} n
+        \end{equation}
+
+        Big-$\Theta$: $\Theta(n^2)$
+
+        Let positive constants $c_1$ and $n_o$, we have:
+
+        \begin{center}
+            $\frac{1}{2} n^2 + \frac{1}{2} n \le c_1\cdot n^2$ for all $n \ge n_0$
+        \end{center}
+
+        $$\frac{1}{2} + \frac{1}{2n} \le c_1$$
+
+        Let $n$ be 1, we have:
+
+        $$\frac{1}{2} + \frac{1}{2 \cdot 1} \le c_1$$
+
+        $$1 \le c_1$$
+
+        As $n \to \infty$, the term $\frac{1}{2n}$ tend to $0$.
+
+        Thus, for all $n \ge 1$, $c_1 \ge 1$.
+
+        Therefore, there exist $n_0 = 1$ and $c_1 = 6$ and Big-$O$: $O(n^2)$.\\
+
+        Let positive constants $c_2$ and $n_o$, we have:
+
+        \begin{center}
+            $\frac{1}{2} n^2 + \frac{1}{2} n \ge c_2\cdot n^2$ for all $n \ge n_0$
+        \end{center}
+
+        $$\frac{1}{2} + \frac{1}{2n} \ge c_2$$
+
+        Let $n$ be 1, we have:
+
+        $$\frac{1}{2} + \frac{1}{2 \cdot 1} \ge c_2$$
+
+        $$1 \ge c_2$$
+
+        As $n \to \infty$, the term $\frac{1}{2n}$ tend to $0$, leaving constant $\frac{1}{2}$.
+
+        Thus, for all $n \ge 1$, $c_2 \ge \frac{1}{2}$.
+
+        Therefore, there exist $n_0 = 1$ and $c_2 = \frac{1}{2}$ and Big-$\Omega$: $\Omega(n^2)$.\\
+
+        Therefore, $\frac{1}{2} n^2 + \frac{1}{2} n$ has a Big-$\Theta$: $\Theta(n^2)$\\
+
+    \item\textbf{ Question 2}
+    \begin{enumerate}
+        \item Converting an image of size nxn from color to grayscale.
+
+        Big-$\Theta$: $\Theta(n^2)$
+
+        Every pixel in the image is visited once to calculate its grayscale using a math formula based on its RGB values in constant time. Therefore, as the width/height of the image grows ($n \to \infty$), the number of pixel grows exponentially ($n^2$), but the time to calculate the grayscale for each pixel remains the same.\\
+
+        \item Multiplying two matrices of size nxn
+
+        Big-$\Theta$: $\Theta(n^3)$
+
+        Multiply two nxn matrix would result in a nxn matrix, such that each value in the new matrix need to be calculated individually. In addition, going from n to n + 1 will meant that each value in the new matrix has to perform one more multiplication and addition. Therefor, as $n \to \infty$, the matrix multiplication grows at the rate of $n^3$.\\
+
+        \item Searching for a number in an unsorted array of size n.
+
+        Big-$\Theta$: $\Theta(n)$
+
+        The function is traversing the entire list and checking every number against a target, which is in linear time.\\
+
+        \item Searching for a number in an balanced binary search tree with n nodes.
+
+        Big-$\Theta$: $\Theta(logn)$
+
+        The function only has to perform one operation at every level of the tree. Given that as the tree grow linearly in height, n grow exponentially. Therefore, the higher n is, the lower the rate of change in tree height is. And because this search function correlates linearly with tree height, it is in $\Theta(logn)$.
+    \end{enumerate}
+\end{itemize}
+
+\end{document}
