@@ -33,37 +33,23 @@
     \item\textbf{ Question 1}
 
     \begin{lstlisting}
-        def getTopology(A):
-            n = len(A)
-            isRing = True
-            isStar = True
-            isFullyConnectedMesh = True
-            isCentralNode = False
+def validateNestedParenthese(brackets):
+    paren_map = {
+        ')': '(',
+        '}': '{',
+        ']': '[',
+    }
+    stack = []
 
-            for i in range(n):
-                totalAdjacent = 0
-                for j in range(n):
-                    if A[i][j]:
-                        totalAdjacent += 1
+    for bracket in brackets:
+        if bracket in "({[":
+            stack.append(bracket)
+        elif len(stack) and paren_map[bracket] == stack[-1]:
+            stack.pop()
+        else:
+            return False
 
-                if isFullyConnectedMesh and totalAdjacent != n - 1:
-                    isFullyConnectedMesh = False
-                if isStar:
-                    if totalAdjacent == n - 1:
-                        isCentralNode = True
-                    elif totalAdjacent != 1:
-                        isStar = False
-                if isRing and totalAdjacent != 2:
-                    isRing = False
-
-            if isRing:
-                return "Ring"
-            elif isFullyConnectedMesh:
-                return "Fully Connected Mesh"
-            elif isStar and isCentralNode:
-                return "Star"
-            else:
-                return "None of the above"
+    return True
 
     \end{lstlisting}
 
