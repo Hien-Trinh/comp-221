@@ -33,20 +33,15 @@
     \item\textbf{ Question 1}
 
     \begin{lstlisting}
-def validateNestedParenthese(brackets):
-    paren_map = {
-        ')': '(',
-        '}': '{',
-        ']': '[',
-    }
-    stack = []
+function validateParenthesis(brackets):
+    stack = new Stack()
 
-    for bracket in brackets:
-        if bracket in "({[":
-            stack.append(bracket)
-        elif len(stack) and paren_map[bracket] == stack[-1]:
+    for bracket in brackets do
+        if bracket in "({[" do
+            stack.add(bracket)
+        else if not stack.isEmpty and getOpenBracket(bracket) == stack.peek() do
             stack.pop()
-        else:
+        else do
             return False
 
     return True
