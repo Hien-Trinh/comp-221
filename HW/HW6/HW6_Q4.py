@@ -38,5 +38,4 @@ def getPath(validWords, source, destination):
 
 
 validWords = buildGraph("threeletterwords.txt")
-# print(validWords)
 print(getPath(validWords, "dog", "cat"))
