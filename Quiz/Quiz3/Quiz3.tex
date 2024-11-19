@@ -1,0 +1,95 @@
+\documentclass{article}
+
+% Formatting
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[titletoc,title]{appendix}
+
+% Math
+\usepackage{amsmath,amsfonts,amssymb,mathtools}
+
+% Algorithms
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{listings}
+
+% Code syntax highlighting
+\usepackage{minted}
+\usemintedstyle{borland}
+
+% Tree & Forest
+\usepackage[edges]{forest}
+
+\title{Quiz 3}
+\author{David Trinh}
+\date{November 1, 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+
+    \item\textbf{Question 1}
+
+        \begin{enumerate}
+            \item quick
+            \item heap
+            \item merge
+        \end{enumerate}
+
+    \item\textbf{Question 2}
+
+        Both algorithms' approach to choosing a pivot depends on the implementation so I'll only focus on the partition step.
+
+        \begin{enumerate}
+            \item Lomuto
+
+                \begin{itemize}
+                    \item One pointer to keep track of the value higher than the pivot seen from the left
+                    \item One pointer iterating through the array from the left
+                    \item Swaps the values at the pointers when the value at the iterating index is in the wrong side of the pivot
+                    \item Doesn't guarantee the values are in the correct place.
+                    \item Performs more swaps
+                \end{itemize}
+
+            \item Hoare
+
+                \begin{itemize}
+                    \item One pointer iterating through the array from the right
+                    \item One pointer iterating through the array from the left
+                    \item Only swaps when BOTH values at the pointers are in the wrong side of the pivot
+                    \item Guarantees the values are in the correct place.
+                    \item Performs less swaps
+                \end{itemize}
+                
+        \end{enumerate}
+
+        I think that Hoare partition is faster because it performs less swaps
+
+    \item\textbf{Question 3}
+
+    \begin{lstlisting}
+
+function checkElementLargerThanIndex(array, left, right):
+    if left > right:
+        return False
+
+    mid = ( left + right ) // 2
+
+    // No need to check left side
+    if array[mid] > mid:
+        return True
+    else:
+        return checkElementLargerThanIndex(array, mid + 1, right)
+
+isValid = not checkElementLargerThanIndex(array, 0, array.length - 1)
+
+
+    \end{lstlisting}
+
+
+
+\end{itemize}
+
+\end{document}

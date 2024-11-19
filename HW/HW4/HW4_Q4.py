@@ -14,4 +14,4 @@ We also saw dates like 05/14/20, 5/2/2020, 2020/05/14, and 05-14-2020.
 Some more dates: 1/1/99, 02/03/1999, and 1999/12/01.
 """
 found_dates = findDates(test_text)
-print(found_dates)
+# print(found_dates)
